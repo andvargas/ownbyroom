@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route } from 'react-router-dom';
+
+import Register from './components/Register/Register';
 
 function App() {
   return (
     <div className="App">
+      
+
+      
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Route path="/" exact component={Register} />
+        <Route path="/thankyou" render={() => <h1>Thank you for registering with us!</h1>} />
       </header>
+      <div>
+        <h2>How it works</h2>
+        <ol>
+          <li>Buddy up with the number of people you would like live in a house.</li>
+          <li>Find a suitable house on ownbyroom.com or any other property websites like Rightmove.co.uk</li>
+          <li>Find an investor buddy who’ll jump in to pay for the common area part of the house in exchange for a transparent management fee/yield.</li>
+          <li>Draw up a shared ownership agreement (in legal terms a deed of trust) which sets down what stake each of the parties own, deposit funds, contribution to the common areas, exit strategy and house rules.</li>
+          <li>Apply for the mortgage with your owner buddies.</li>
+          <li>Move in and enjoy the company of likeminded individuals sharing the costs of owning a house.</li>
+        </ol>
+      </div>
     </div>
   );
 }
