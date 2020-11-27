@@ -28,3 +28,8 @@
     outline: none;
     background-color: lavender;
 }
+
+.Invalid {
+    border: 1px solid red;
+    background-color: rgb(245, 142, 158);
+}

@@ -14,7 +14,12 @@ class Register extends Component {
                     type: 'text',
                     placeholder: 'Full Name'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
             },
             email: {
                 elementType: 'input',
@@ -22,9 +27,15 @@ class Register extends Component {
                     type: 'email',
                     placeholder: 'Email'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
             }
         },
+        formIsValid: false,
         formSubmitted: false
     }
 
@@ -49,6 +60,16 @@ class Register extends Component {
         
     }
 
+    checkValidity (value, rules) {
+        let isValid = false;
+
+        if (rules.required) {
+            isValid = value.trim() !== '';
+        }
+
+        return isValid;
+    }
+
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedRegForm = {
             ...this.state.registrationForm
@@ -57,8 +78,16 @@ class Register extends Component {
             ...updatedRegForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
         updatedRegForm[inputIdentifier] = updatedFormElement;
-        this.setState({registrationForm: updatedRegForm})
+        
+        let formIsValid = true;
+        for (let inputIdentifier in updatedRegForm) {
+            formIsValid = updatedRegForm[inputIdentifier].valid && formIsValid;
+        }
+
+        this.setState({registrationForm: updatedRegForm, formIsValid: formIsValid})
     }
 
     render() {
@@ -85,9 +114,11 @@ class Register extends Component {
                             elementType={formElement.config.elementType}
                             elementConfig={formElement.config.elementConfig}
                             value={formElement.config.value}
+                            invalid={!formElement.config.valid}
+                            touched={formElement.config.touched}
                             changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                     ))}
-                    <button>REGISTER</button>
+                    <button disabled={!this.state.formIsValid}>REGISTER</button>
 
                 </form>
             </div>
