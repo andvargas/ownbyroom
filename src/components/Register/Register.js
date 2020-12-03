@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import '../LoginPage/LoginPage.module.css';
 import Input from '../UI/Input/Input';
+import Logo from '../Logo/Logo';
 
 class Register extends Component {
     state = {
@@ -105,7 +106,7 @@ class Register extends Component {
         return (
             <div>
                 {redirect}
-                <h1>ownbyroom.com</h1>
+                <Logo />
                 <p>Pre-register and subscribe to our news to get notified when we go live.</p>
                 <form onSubmit={this.registerDataHandler}>
                     {formElementsArray.map(formElement => (
